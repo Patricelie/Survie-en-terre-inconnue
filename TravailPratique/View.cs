@@ -31,7 +31,10 @@ namespace TravailPratique
                     if (y == posY && x == posX)
                     {
                         Console.WriteLine('X');
+                        Console.BackgroundColor = ConsoleColor.DarkGreen;
+                        Console.ResetColor();
                     }
+
                     else
                     {
                         Console.Write(grid[y, x]);
@@ -41,51 +44,77 @@ namespace TravailPratique
             }
         }
 
-        public static char color = Game.DiscoverLand();
-        public static void GenerateColor(color)
+        /*
+        public static void GenerateColor(char color)
         {
-            if (grid[posY, posX] == 'color')
+            Game.DiscoverLand();
+            if (Game.grid[Game.posY, Game.posX] == color)
             {
                 switch (color)
                 {
-                    case 0:
-                        Console.BackgroundColor = ConsoleColor.DarkGreen/*Foret*/;
+                    case '0':
+                        Console.BackgroundColor = ConsoleColor.DarkGreen;
                         Console.ResetColor();
                         break;
-                    case 1:
-                        Console.BackgroundColor = ConsoleColor.Blue/*Riviere*/;
+                    case '1':
+                        Console.BackgroundColor = ConsoleColor.Blue;
                         Console.ResetColor();
                         break;
-                    case 2:
-                        Console.BackgroundColor = ConsoleColor.Yellow/*Desert*/;
+                    case '2':
+                        Console.BackgroundColor = ConsoleColor.Yellow;
                         Console.ResetColor();
                         break;
-                    case 3:
-                        Console.BackgroundColor = ConsoleColor.Gray/*Montagne*/;
+                    case '3':
+                        Console.BackgroundColor = ConsoleColor.Gray;
                         Console.ResetColor();
                         break;
-                    case 4:
-                        Console.BackgroundColor = ConsoleColor.Green/*Prairie*/;
+                    case '4':
+                        Console.BackgroundColor = ConsoleColor.Green;
                         Console.ResetColor();
                         break;
-                    case 5:
-                        Console.BackgroundColor = ConsoleColor.DarkBlue/*Marais*/;
+                    case '5':
+                        Console.BackgroundColor = ConsoleColor.DarkBlue;
                         Console.ResetColor();
                         break;
                 }
-                grid[posY, posX] = color;
             }
         }
-
-        public static void GenerateColor()
+        */
+        public static void GenerateColor(char color)
         {
-    
-            if( color == 0)
+            Game.DiscoverLand();
+            if (Game.grid[Game.posY, Game.posX] == '0')
+            {
+                Console.BackgroundColor = ConsoleColor.DarkGreen/*Foret*/;
+                Console.ResetColor();
+            }
+            else if (Game.grid[Game.posY, Game.posX] == '1')
+            {
+                Console.BackgroundColor = ConsoleColor.Blue/*Foret*/;
+                Console.ResetColor();
+            }
+            else if (Game.grid[Game.posY, Game.posX] == '2')
+            {
+                Console.BackgroundColor = ConsoleColor.Yellow/*Foret*/;
+                Console.ResetColor();
+            }
+            else if (Game.grid[Game.posY, Game.posX] == '3')
+            {
+                Console.BackgroundColor = ConsoleColor.Gray/*Foret*/;
+                Console.ResetColor();
+            }
+            else if (Game.grid[Game.posY, Game.posX] == '4')
             {
                 Console.BackgroundColor = ConsoleColor.Green/*Foret*/;
+                Console.ResetColor();
             }
-            else if( color == 1) {
-                Console.BackgroundColor = ConsoleColor.Blue/*Riviere*/;
+            else if (Game.grid[Game.posY, Game.posX] == '5')
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue/*Foret*/;
+                Console.ResetColor();
             }
+
+        }
+
     }
 }

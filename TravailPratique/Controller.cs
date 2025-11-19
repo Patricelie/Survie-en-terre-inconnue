@@ -13,24 +13,28 @@ namespace TravailPratique
             while (true)
             {
                 Console.Clear();
-                Vue.DisplayGrid(Grid.grid, Grid.posY, Grid.posX);
+                View.DisplayGrid(Game.grid, Game.posY, Game.posX);
                 ConsoleKeyInfo input = Console.ReadKey();
                 switch (input.Key)
                 {
                     case ConsoleKey.UpArrow:
                         Game.MoveUp();
+                        View.GenerateColor('0');
                         Game.PlaceBloc();
                         break;
                     case ConsoleKey.DownArrow:
                         Game.MoveDown();
+                        View.GenerateColor('0');
                         Game.PlaceBloc();
                         break;
                     case ConsoleKey.LeftArrow:
                         Game.MoveLeft();
+                        View.GenerateColor('0');
                         Game.PlaceBloc();
                         break;
                     case ConsoleKey.RightArrow:
                         Game.MoveRight();
+                        View.GenerateColor('0');
                         Game.PlaceBloc();
                         break;
                     case ConsoleKey.Escape:

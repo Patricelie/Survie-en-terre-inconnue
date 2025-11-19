@@ -30,7 +30,7 @@ namespace TravailPratique
 
             if (grid[posY, posX] == ' ')
             {
-                char color = Convert.ToChar(rnd.Next(0, 7));
+                char color = Convert.ToChar(rnd.Next(0, 6));
                 grid[posY, posX] = color;
             }
         }
@@ -71,6 +71,10 @@ namespace TravailPratique
             }
         }
        
+        public static void PlaceBloc()
+        {
+            grid[posY, posX] = '█';
+        }
             //alt + 219 █
       
     }

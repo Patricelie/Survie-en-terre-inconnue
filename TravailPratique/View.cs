@@ -41,6 +41,42 @@ namespace TravailPratique
             }
         }
 
+        public static char color = Game.DiscoverLand();
+        public static void GenerateColor(color)
+        {
+            if (grid[posY, posX] == 'color')
+            {
+                switch (color)
+                {
+                    case 0:
+                        Console.BackgroundColor = ConsoleColor.DarkGreen/*Foret*/;
+                        Console.ResetColor();
+                        break;
+                    case 1:
+                        Console.BackgroundColor = ConsoleColor.Blue/*Riviere*/;
+                        Console.ResetColor();
+                        break;
+                    case 2:
+                        Console.BackgroundColor = ConsoleColor.Yellow/*Desert*/;
+                        Console.ResetColor();
+                        break;
+                    case 3:
+                        Console.BackgroundColor = ConsoleColor.Gray/*Montagne*/;
+                        Console.ResetColor();
+                        break;
+                    case 4:
+                        Console.BackgroundColor = ConsoleColor.Green/*Prairie*/;
+                        Console.ResetColor();
+                        break;
+                    case 5:
+                        Console.BackgroundColor = ConsoleColor.DarkBlue/*Marais*/;
+                        Console.ResetColor();
+                        break;
+                }
+                grid[posY, posX] = color;
+            }
+        }
+
         public static void GenerateColor()
         {
     

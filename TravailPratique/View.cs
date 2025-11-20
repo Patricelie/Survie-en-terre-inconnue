@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TravailPratique
 {
@@ -20,101 +21,95 @@ namespace TravailPratique
             Console.WriteLine("5. Quitter");
             Console.WriteLine("------------------------------------");
             Console.Write("Choisissez une option:");
-            string option = Console.ReadLine();
         }
-        public static void DisplayGrid(char[,] grid, int posY, int posX)
+        public static void DisplayGameMenu()
+        {
+            Console.WriteLine("Jeu en cours...");
+            Console.WriteLine($"Position du joueur:({Game.grid[Game.posY, Game.posX]}) - Terrain: {DisplayNameField(Game.grid)}");
+            Console.WriteLine("--------------------------------------------------------");
+            Console.WriteLine("Utilisez les flèches pour vous déplacer.");
+            Console.WriteLine("Apuyez sur Espace pour collecter des ressources.");
+            Console.WriteLine("Apuyez sur Entrée pour ouvrir l'inventaire ou fabriquer des matériaux.");
+            Console.WriteLine("Apuyez sur Esc pour revenir au menu principal.");
+            Console.WriteLine("--------------------------------------------------------");
+        }
+
+        public static void DisplayInventory()
+        {
+            Console.WriteLine("Inventaire du Joueur");
+            Console.WriteLine("--------Ressources---------------");
+            Console.WriteLine($"Fer:{Game.countMontagne}");
+            Console.WriteLine($"Silex:{Game.countRiviere}");
+            Console.WriteLine($"Bois:{Game.countForet}");
+            Console.WriteLine($"Argile:{Game.countMarais}");
+            Console.WriteLine($"Herbe:{Game.countPrairie}");
+            Console.WriteLine($"Sable:{Game.countDesert}");
+            Console.WriteLine("--------Outils---------------");
+            Console.WriteLine($"Feu:{1}");
+            Console.WriteLine($"Hache:{1}");
+            Console.WriteLine($"Vitre:{1}");
+            Console.WriteLine($"Planche:{1}");
+            Console.WriteLine($"Brique:{1}");
+            Console.WriteLine($"Isolant:{1}");
+            Console.WriteLine($"Maison:{1}");
+            Console.WriteLine("--------------------------------------------------------");
+            Console.WriteLine("Vous devez être à votre camp de base pour fabriquer des outils ou des matériaux.");
+            Console.WriteLine("Appuyez sur une touche pour continuer...");
+        }
+        public static void DisplayGrid(int[,] grid, int posY, int posX)
         {
             for (int y = 0; y < grid.GetLength(0); y++)
             {
                 for (int x = 0; x < grid.GetLength(1); x++)
                 {
+                    Console.BackgroundColor = GenerateColor(grid[y, x]);
                     if (y == posY && x == posX)
                     {
-                        Console.WriteLine('X');
-                        Console.BackgroundColor = ConsoleColor.DarkGreen;
-                        Console.ResetColor();
+                        Console.Write('X');
                     }
-
                     else
                     {
-                        Console.Write(grid[y, x]);
+                        Console.Write(' ');
                     }
+                    Console.ResetColor();
                 }
                 Console.WriteLine();
             }
         }
 
-        /*
-        public static void GenerateColor(char color)
+        public static ConsoleColor GenerateColor(int color)
         {
-            Game.DiscoverLand();
-            if (Game.grid[Game.posY, Game.posX] == color)
+
+            switch (color)
             {
-                switch (color)
-                {
-                    case '0':
-                        Console.BackgroundColor = ConsoleColor.DarkGreen;
-                        Console.ResetColor();
-                        break;
-                    case '1':
-                        Console.BackgroundColor = ConsoleColor.Blue;
-                        Console.ResetColor();
-                        break;
-                    case '2':
-                        Console.BackgroundColor = ConsoleColor.Yellow;
-                        Console.ResetColor();
-                        break;
-                    case '3':
-                        Console.BackgroundColor = ConsoleColor.Gray;
-                        Console.ResetColor();
-                        break;
-                    case '4':
-                        Console.BackgroundColor = ConsoleColor.Green;
-                        Console.ResetColor();
-                        break;
-                    case '5':
-                        Console.BackgroundColor = ConsoleColor.DarkBlue;
-                        Console.ResetColor();
-                        break;
-                }
+                case Game.MARAIS: return ConsoleColor.DarkBlue;
+                case Game.FORET: return ConsoleColor.DarkGreen;
+                case Game.DESERT: return ConsoleColor.Yellow;
+                case Game.MONTAGNE: return ConsoleColor.Gray;
+                case Game.RIVIERE: return ConsoleColor.Blue;
+                case Game.PRAIRIE: return ConsoleColor.Green;
+                default: return ConsoleColor.Black;
             }
         }
-        */
-        public static void GenerateColor(char color)
+
+        public static String DisplayNameField(int[,] grid)
         {
-            Game.DiscoverLand();
-            if (Game.grid[Game.posY, Game.posX] == '0')
+            switch (Game.grid[Game.posY, Game.posX])
             {
-                Console.BackgroundColor = ConsoleColor.DarkGreen/*Foret*/;
-                Console.ResetColor();
+                case Game.MARAIS:
+                    return "Marais";
+                case Game.FORET:
+                    return "Foret";
+                case Game.PRAIRIE:
+                    return "Prairie";
+                case Game.MONTAGNE:
+                    return "Montagne";
+                case Game.RIVIERE:
+                    return "Riviere";
+                case Game.DESERT:
+                    return "Désert";
+                default: return "Base";
             }
-            else if (Game.grid[Game.posY, Game.posX] == '1')
-            {
-                Console.BackgroundColor = ConsoleColor.Blue/*Foret*/;
-                Console.ResetColor();
-            }
-            else if (Game.grid[Game.posY, Game.posX] == '2')
-            {
-                Console.BackgroundColor = ConsoleColor.Yellow/*Foret*/;
-                Console.ResetColor();
-            }
-            else if (Game.grid[Game.posY, Game.posX] == '3')
-            {
-                Console.BackgroundColor = ConsoleColor.Gray/*Foret*/;
-                Console.ResetColor();
-            }
-            else if (Game.grid[Game.posY, Game.posX] == '4')
-            {
-                Console.BackgroundColor = ConsoleColor.Green/*Foret*/;
-                Console.ResetColor();
-            }
-            else if (Game.grid[Game.posY, Game.posX] == '5')
-            {
-                Console.BackgroundColor = ConsoleColor.DarkBlue/*Foret*/;
-                Console.ResetColor();
-            }
-
         }
-
     }
 }

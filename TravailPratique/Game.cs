@@ -21,6 +21,13 @@ namespace TravailPratique
         public static int countRiviere = 0;
         public static int countPrairie = 0;
         public static int countDesert = 0;
+        public static int countFeu = 0;
+        public static int countHache = 0;
+        public static int countVitre = 0;
+        public static int countPlanche = 0;
+        public static int countBrique = 0;
+        public static int countIsolant= 0;
+        public static int countMaison = 0;
         public static int[,] grid =
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -113,5 +120,71 @@ namespace TravailPratique
                 default: return 0;
             }
         }
+        public static int Tools(ConsoleKeyInfo input)
+        {
+            switch (input.Key)
+            {
+                case ConsoleKey.A:
+                    if(countForet > 2 && countRiviere > 1)
+                    {
+                        countFeu++;
+                        countForet -= 2;
+                        countRiviere--;
+                    }
+                    return countFeu;
+                case ConsoleKey.B:
+                    if (countForet > 1 && countMontagne > 1)
+                    {
+                        countHache++;
+                        countForet--;
+                        countMontagne--;
+                    }
+                    return countHache;
+                case ConsoleKey.C:
+                    if (countDesert > 5 && countFeu > 1)
+                    {
+                        countVitre++;
+                        countDesert -= 5;
+                        countFeu--;
+                    }
+                    return countVitre;
+                case ConsoleKey.D:
+                    if (countForet > 4 && countHache > 1)
+                    {
+                        countPlanche++;
+                        countForet -= 4;
+                        countHache--;
+                    }
+                    return countPlanche;
+                case ConsoleKey.E:
+                    if (countMarais > 3 && countFeu > 1)
+                    {
+                        countBrique++;
+                        countMarais -= 3;
+                        countFeu--;
+                    }
+                    return countBrique;
+                case ConsoleKey.F:
+                    if (countPrairie > 3)
+                    {
+                        countIsolant++;
+                        countPrairie -= 3;
+                    }
+                    return countIsolant;
+                case ConsoleKey.G:
+                    if (countPlanche > 4 && countBrique > 4 && countIsolant > 4 && countVitre > 2)
+                    {
+                        countMaison++;
+                        countPlanche -= 4;
+                        countBrique -= 4;
+                        countIsolant -= 4;
+                        countVitre -= 2;
+                    }
+                    return countMaison;
+                default: return 0;
+
+            }
+        }
+
     }
 }

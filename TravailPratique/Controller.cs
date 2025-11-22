@@ -22,9 +22,20 @@ namespace TravailPratique
                 switch (choice)
                 {
                     case "1":
+                        InitializeGame();
+                        break;
+                    case "2":
                         GameController();
                         break;
+                    case "3":
+                        break;
                     case "4":
+                        View.DisplayCredits();
+                        ConsoleKeyInfo touche = Console.ReadKey();
+                        if (touche.Key == ConsoleKey.Enter)
+                        {
+                            MenuController();
+                        }
                         break;
                     case "5":
                         return;
@@ -58,14 +69,41 @@ namespace TravailPratique
                         Game.Collect(Game.grid);
                         break;
                     case ConsoleKey.Enter:
-                        MenuGameController();
+                        if (Game.posY == 0 && Game.posX == 0)
+                        {
+                            BuildController();
+                        }
+                        else
+                        {
+                            MenuGameController();
+                        }
                         break;
                     case ConsoleKey.Escape:
-                        return;
+                        MenuController();
+                        break;
                 }
             }
 
         }
+
+        public static void BuildController()
+        {
+            while (true)
+            {
+                Console.Clear();
+                View.DisplayMaterial();
+                ConsoleKeyInfo input = Console.ReadKey();
+                Game.Tools(input);
+            }
+        }
+        public static void InitializeGame()
+        {
+         
+            Game.posY = 0;
+            Game.posX = 0;
+            GameController();
+        }
+
         public static void MenuGameController()
         {
             while (true)

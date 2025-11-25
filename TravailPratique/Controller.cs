@@ -22,7 +22,8 @@ namespace TravailPratique
                 switch (choice)
                 {
                     case "1":
-                        InitializeGame();
+                        Game.InitializeGame();
+                        GameController();
                         break;
                     case "2":
                         GameController();
@@ -32,13 +33,12 @@ namespace TravailPratique
                     case "4":
                         View.DisplayCredits();
                         ConsoleKeyInfo touche = Console.ReadKey();
-                        if (touche.Key == ConsoleKey.Enter)
-                        {
-                            MenuController();
-                        }
+                        
                         break;
                     case "5":
-                        return;
+                        Console.Clear();
+                        View.EndGame();
+                        return; 
                 }
 
             }
@@ -55,18 +55,23 @@ namespace TravailPratique
                 {
                     case ConsoleKey.UpArrow:
                         Game.MoveUp();
+                        Game.WinterTimer();
                         break;
                     case ConsoleKey.DownArrow:
                         Game.MoveDown();
+                        Game.WinterTimer();
                         break;
                     case ConsoleKey.LeftArrow:
                         Game.MoveLeft();
+                        Game.WinterTimer();
                         break;
                     case ConsoleKey.RightArrow:
                         Game.MoveRight();
+                        Game.WinterTimer();
                         break;
                     case ConsoleKey.Spacebar:
                         Game.Collect(Game.grid);
+                        Game.WinterTimer();
                         break;
                     case ConsoleKey.Enter:
                         if (Game.posY == 0 && Game.posX == 0)
@@ -79,8 +84,8 @@ namespace TravailPratique
                         }
                         break;
                     case ConsoleKey.Escape:
-                        MenuController();
-                        break;
+                        Game.WinterTimer();
+                        return;
                 }
             }
 
@@ -94,20 +99,14 @@ namespace TravailPratique
                 View.DisplayMaterial();
                 ConsoleKeyInfo input = Console.ReadKey();
                 Game.Tools(input);
+                View.Succeed();
                 if (input.Key == ConsoleKey.Enter)
                 {
-                    GameController();
+                    return;
                 }
             }
         }
-        public static void InitializeGame()
-        {
          
-            Game.posY = 0;
-            Game.posX = 0;
-            GameController();
-        }
-
         public static void MenuGameController()
         {
             while (true)
@@ -117,7 +116,7 @@ namespace TravailPratique
                 ConsoleKeyInfo touche = Console.ReadKey();
                 if (touche.Key == ConsoleKey.Enter)
                 {
-                    GameController();
+                   return ;
                 }
             }
         }

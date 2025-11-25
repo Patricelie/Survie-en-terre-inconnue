@@ -24,8 +24,8 @@ namespace TravailPratique
         }
         public static void DisplayGameMenu()
         {
-            Console.WriteLine("Jeu en cours...");
-            Console.WriteLine($"Position du joueur: - Terrain: {DisplayNameField(Game.grid)}");
+            Console.WriteLine($"Jeu en cours...Il vous reste {Game.countHiver} actions avant l'hivers");
+            Console.WriteLine($"Position du joueur: {(Game.posY, Game.posX)} - Terrain: {DisplayNameField(Game.grid)}");
             Console.WriteLine("--------------------------------------------------------");
             Console.WriteLine("Utilisez les flèches pour vous déplacer.");
             Console.WriteLine("Apuyez sur Espace pour collecter des ressources.");
@@ -77,7 +77,7 @@ namespace TravailPratique
             Console.WriteLine($"Herbe:{Game.countPrairie}");
             Console.WriteLine($"Sable:{Game.countDesert}");
             Console.WriteLine("--------Outils---------------");
-             Console.WriteLine($"Feu:{Game.countFeu}");
+            Console.WriteLine($"Feu:{Game.countFeu}");
             Console.WriteLine($"Hache:{Game.countHache}");
             Console.WriteLine($"Vitre:{Game.countVitre}");
             Console.WriteLine($"Planche:{Game.countPlanche}");
@@ -85,13 +85,13 @@ namespace TravailPratique
             Console.WriteLine($"Isolant:{Game.countIsolant}");
             Console.WriteLine($"Maison:{Game.countMaison}");
             Console.WriteLine("-----------------------");
-            Console.WriteLine("A. Feu: 2 Bois, 1 Silex");
-            Console.WriteLine("B. Hache: 1 Bois, 1 Fer");
-            Console.WriteLine("C. Vitre: 5 Sable, 1 Feu");
-            Console.WriteLine("D. Planche: 4 Bois, 1 Hache");
-            Console.WriteLine("E. Brique: 3 Argile, 1 Feu");
-            Console.WriteLine("F. Isolant: 3 Herbe");
-            Console.WriteLine("G. Maison: 4 Planche, 4 Brique, 4 Isolant, 2 Vitre");
+            Console.WriteLine("1. Feu: 2 Bois, 1 Silex");
+            Console.WriteLine("2. Hache: 1 Bois, 1 Fer");
+            Console.WriteLine("3. Vitre: 5 Sable, 1 Feu");
+            Console.WriteLine("4. Planche: 4 Bois, 1 Hache");
+            Console.WriteLine("5. Brique: 3 Argile, 1 Feu");
+            Console.WriteLine("6. Isolant: 3 Herbe");
+            Console.WriteLine("7. Maison: 4 Planche, 4 Brique, 4 Isolant, 2 Vitre");
             Console.WriteLine("Choisissez un objet à fabriquer (ou appuyez sur Entrée pour annuler):");
         }
         public static void DisplayGrid(int[,] grid, int posY, int posX)
@@ -114,20 +114,6 @@ namespace TravailPratique
                 Console.WriteLine();
             }
         }
-
-        /*public static string DisplayPosition(int[,] grid)
-        {
-            for (int y = 0; y < grid.GetLength(0); y++)
-            {
-                for (int x = 0; x < grid.GetLength(1); x++)
-                {
-                    if (y == Game.posY && x == Game.posX)
-                    {
-                        return $"({y}, {x})";
-                    }
-                }
-            }
-        }*/
 
         public static ConsoleColor GenerateColor(int color)
         {
@@ -161,6 +147,19 @@ namespace TravailPratique
                 case Game.DESERT:
                     return "Désert";
                 default: return "Base";
+            }
+        }
+
+        public static void EndGame()
+        {
+            Console.WriteLine("Merci d'avoir joué");
+        }
+
+        public static void Succeed()
+        {
+            if (Game.countMaison == 1)
+            {
+                Console.WriteLine("Vous avez réussi à construire votre maison");
             }
         }
     }

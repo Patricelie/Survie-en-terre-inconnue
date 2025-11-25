@@ -28,6 +28,7 @@ namespace TravailPratique
         public static int countBrique = 0;
         public static int countIsolant= 0;
         public static int countMaison = 0;
+        public static int countHiver = 60;
         public static int[,] grid =
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -44,7 +45,24 @@ namespace TravailPratique
         public static int posX = 0;
         public static int posY = 0;
         public static Random rnd = new Random();
-
+        public static void InitializeGame()
+        {
+            posX = 0;
+            posY = 0;
+            grid = new int[,]
+            {
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            }; 
+        }
         public static void DiscoverLand()
         {
 
@@ -124,55 +142,55 @@ namespace TravailPratique
         {
             switch (input.Key)
             {
-                case ConsoleKey.A:
-                    if(countForet > 2 && countRiviere > 1)
+                case ConsoleKey.D1:
+                    if(countForet >= 2 && countRiviere >= 1)
                     {
                         countFeu++;
                         countForet -= 2;
                         countRiviere--;
                     }
-                    return countFeu;
-                case ConsoleKey.B:
-                    if (countForet > 1 && countMontagne > 1)
+                        return countFeu;
+                case ConsoleKey.D2:
+                    if (countForet >= 1 && countMontagne >= 1)
                     {
                         countHache++;
                         countForet--;
                         countMontagne--;
                     }
                     return countHache;
-                case ConsoleKey.C:
-                    if (countDesert > 5 && countFeu > 1)
+                case ConsoleKey.D3:
+                    if (countDesert >= 5 && countFeu >= 1)
                     {
                         countVitre++;
                         countDesert -= 5;
                         countFeu--;
                     }
                     return countVitre;
-                case ConsoleKey.D:
-                    if (countForet > 4 && countHache > 1)
+                case ConsoleKey.D4:
+                    if (countForet >= 4 && countHache >= 1)
                     {
                         countPlanche++;
                         countForet -= 4;
                         countHache--;
                     }
                     return countPlanche;
-                case ConsoleKey.E:
-                    if (countMarais > 3 && countFeu > 1)
+                case ConsoleKey.D5:
+                    if (countMarais >= 3 && countFeu >= 1)
                     {
                         countBrique++;
                         countMarais -= 3;
                         countFeu--;
                     }
                     return countBrique;
-                case ConsoleKey.F:
-                    if (countPrairie > 3)
+                case ConsoleKey.D6:
+                    if (countPrairie >= 3)
                     {
                         countIsolant++;
                         countPrairie -= 3;
                     }
                     return countIsolant;
-                case ConsoleKey.G:
-                    if (countPlanche > 4 && countBrique > 4 && countIsolant > 4 && countVitre > 2)
+                case ConsoleKey.D7:
+                    if (countPlanche >= 4 && countBrique >= 4 && countIsolant >= 4 && countVitre >= 2)
                     {
                         countMaison++;
                         countPlanche -= 4;
@@ -185,6 +203,12 @@ namespace TravailPratique
 
             }
         }
-
+        
+        public static int WinterTimer()
+        {
+            return countHiver--;
+             
+        }
+         
     }
 }

@@ -33,12 +33,12 @@ namespace TravailPratique
                     case "4":
                         View.DisplayCredits();
                         ConsoleKeyInfo touche = Console.ReadKey();
-                        
+
                         break;
                     case "5":
                         Console.Clear();
                         View.EndGame();
-                        return; 
+                        return;
                 }
 
             }
@@ -51,42 +51,50 @@ namespace TravailPratique
                 View.DisplayGameMenu();
                 View.DisplayGrid(Game.grid, Game.posY, Game.posX);
                 ConsoleKeyInfo input = Console.ReadKey();
-                switch (input.Key)
+                if (Game.countHiver > 0)
                 {
-                    case ConsoleKey.UpArrow:
-                        Game.MoveUp();
-                        Game.WinterTimer();
-                        break;
-                    case ConsoleKey.DownArrow:
-                        Game.MoveDown();
-                        Game.WinterTimer();
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        Game.MoveLeft();
-                        Game.WinterTimer();
-                        break;
-                    case ConsoleKey.RightArrow:
-                        Game.MoveRight();
-                        Game.WinterTimer();
-                        break;
-                    case ConsoleKey.Spacebar:
-                        Game.Collect(Game.grid);
-                        Game.WinterTimer();
-                        break;
-                    case ConsoleKey.Enter:
-                        if (Game.posY == 0 && Game.posX == 0)
-                        {
-                            BuildController();
-                        }
-                        else
-                        {
-                            MenuGameController();
-                        }
-                        break;
-                    case ConsoleKey.Escape:
-                        Game.WinterTimer();
-                        return;
+                    switch (input.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            Game.MoveUp();
+                            Game.WinterTimer();
+                            break;
+                        case ConsoleKey.DownArrow:
+                            Game.MoveDown();
+                            Game.WinterTimer();
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            Game.MoveLeft();
+                            Game.WinterTimer();
+                            break;
+                        case ConsoleKey.RightArrow:
+                            Game.MoveRight();
+                            Game.WinterTimer();
+                            break;
+                        case ConsoleKey.Spacebar:
+                            Game.Collect(Game.grid);
+                            Game.WinterTimer();
+                            break;
+                        case ConsoleKey.Enter:
+                            if (Game.posY == 0 && Game.posX == 0)
+                            {
+                                BuildController();
+                            }
+                            else
+                            {
+                                MenuGameController();
+                            }
+                            break;
+                        case ConsoleKey.Escape:
+                            Game.WinterTimer();
+                            return;
+                    }
                 }
+                else
+                {
+                    SuccessController();
+                }
+
             }
 
         }
@@ -106,7 +114,7 @@ namespace TravailPratique
                 }
             }
         }
-         
+
         public static void MenuGameController()
         {
             while (true)
@@ -116,9 +124,18 @@ namespace TravailPratique
                 ConsoleKeyInfo touche = Console.ReadKey();
                 if (touche.Key == ConsoleKey.Enter)
                 {
-                   return ;
+                    return;
                 }
             }
+        }
+
+        public static void SuccessController()
+        {
+            while (true) 
+            {
+                return;
+            }
+            
         }
     }
 }

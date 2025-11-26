@@ -107,7 +107,7 @@ namespace TravailPratique
                     }
                     else
                     {
-                        Console.Write(" ");
+                        Console.Write("  ");
                     }
                     Console.ResetColor();
                 }

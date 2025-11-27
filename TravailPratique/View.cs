@@ -41,7 +41,8 @@ namespace TravailPratique
             Console.WriteLine("-Patricelie Njoh Ngueng");
             Console.WriteLine("-Aminata Diao");
             Console.WriteLine("Nos améliorations");
-            Console.WriteLine("Merci d'avoir joué!");
+            Console.WriteLine("1. Un chronomètre annonçant l’arrivé de l’hiver.");
+            Console.WriteLine("2. Du Ascii Art représentant les tuiles");
             Console.WriteLine("Apuyez sur une touche pour continuer.");
         }
         public static void DisplayInventory()
@@ -64,7 +65,7 @@ namespace TravailPratique
             Console.WriteLine($"Maison:{Game.countMaison}");
             Console.WriteLine("--------------------------------------------------------");
             Console.WriteLine("Vous devez être à votre camp de base pour fabriquer des outils ou des matériaux.");
-            Console.WriteLine("Appuyez sur une touche pour continuer...");
+            Console.WriteLine("Appuyez sur Entrer pour continuer...");
         }
         public static void DisplayMaterial()
         {
@@ -135,18 +136,18 @@ namespace TravailPratique
             switch (Game.grid[Game.posY, Game.posX])
             {
                 case Game.MARAIS:
-                    return "Marais";
+                    return "Marais \n ^  ^  ^   ^         \r\n/|\\/|\\/|\\ /|\\      \r\n/|\\/|\\/|\\ /|\\      \r\n/|\\/|\\/|\\ /|\\ \r\n^\"~-,._.,-~\"^\"~-,._\\/,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._";
                 case Game.FORET:
-                    return "Foret";
+                    return "Foret \n ^  ^   ^  ^  ^   ^  ^\r\n/|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n/|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n/|\\/|\\ /|\\/|\\/|\\ /|\\/|\\";
                 case Game.PRAIRIE:
-                    return "Prairie";
+                    return "Prairie \n                     _\r\n                  _(_)_                          wWWWw   _\r\n      @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_\r\n     @@()@@ wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)\r\n      @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\\r\n       /      Y       \\|    \\|/    /(_)    \\|      |/      |\r\n    \\ |     \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/\r\njgs \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|// \r\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^";
                 case Game.MONTAGNE:
-                    return "Montagne";
+                    return "Montagne \n           ,                  /\\.__      _.-\\\r\n          /~\\,      __       /~    \\   ./    \\\r\n        ,/  /_\\   _/  \\    ,/~,_.~'\"\\ /_\\_  /'\\\r\n       / \\ /## \\ / V#\\/\\  /~8#  # ## V8  #\\/8 8\\\r\n     /~#'#\"#\"\"##V&#&# ##\\/88#\"#8# #\" #\\#&\"##\" ##\\\r\n    j# ##### #\"#\\&&\"####/###&  #\"#&## #&\" #\"#&#\"#'\\\r\n   /#\"#\"#####\"###'\\&##\"/&#\"####\"### # #&#&##\"#\"### \\\r\n  J#\"###\"#\"#\"#\"####'\\# #\"##\"#\"##\"#\"#####&\"## \"#\"&\"##|\\";
                 case Game.RIVIERE:
-                    return "Riviere";
+                    return "Riviere \n ^\"~-,._.,-~\"^\"~-,._\\/,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._";
                 case Game.DESERT:
-                    return "Désert";
-                default: return "Base";
+                    return "Désert \n          || |                               \r\n          || |   ,                          \r\n          || |  | |\r\n          || '--' |\r\n    ,,    || .----'\r\n   || |   || |\r\n   |  '---'| |\r\n   '------.| |                                  _____\r\n   ((_))  || |      (  _                       / /|\\ \\\r\n   (o o)  || |      ))(\"),                    | | | | |\r\n____\\_/___||_|_____((__^_))____________________\\_\\|/_/__";
+                default: return "Base \n  .-------------------.              ___\r\n(   I had a crash!    )            /  /]\r\n `-------------.   ,-'            /  / ]\r\n                \\ |      _____,. '  /__]\r\n             )   \\|   ,-'             _>\r\n               (  ` _/  AVION    ,. '`\r\n              )    / |     _,. '`\r\n              (   /. /    |\r\n               ) ,  /`  ./\r\n              (  \\_/   //_ _\r\n               ) /    //  (_)\r\n             _,~'#   (/.\r\n~~~~~~~~~~~~~~~#~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~";
             }
         }
 
@@ -157,10 +158,16 @@ namespace TravailPratique
 
         public static void Succeed()
         {
-            if (Game.countMaison == 1)
-            {
-                Console.WriteLine("Vous avez réussi à construire votre maison");
-            }
+            Console.Clear();
+            Console.WriteLine("  ___I_\r\n /\\-_--\\\r\n/  \\_-__\\\r\n|[]| [] |");
+            Console.WriteLine("Vous avez réussi à construire votre maison");
+            Console.ReadKey();
+        }
+        public static void DisplayGameOver()
+        {
+            Console.Clear();
+            Console.WriteLine("Vous avez perdu le jeu car l'hiver est arrivé");
+            Console.ReadKey();
         }
     }
 }

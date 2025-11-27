@@ -26,9 +26,9 @@ namespace TravailPratique
         public static int countVitre = 0;
         public static int countPlanche = 0;
         public static int countBrique = 0;
-        public static int countIsolant= 0;
+        public static int countIsolant = 0;
         public static int countMaison = 0;
-        public static int countHiver = 60;
+        public static int countHiver = 560;
         public static int[,] grid =
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -61,7 +61,21 @@ namespace TravailPratique
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            }; 
+            };
+            countMarais = 0;
+            countForet = 0;
+            countMontagne = 0;
+            countRiviere = 0;
+            countPrairie = 0;
+            countDesert = 0;
+            countFeu = 0;
+            countHache = 0;
+            countVitre = 0;
+            countPlanche = 0;
+            countBrique = 0;
+            countIsolant = 0;
+            countMaison = 0;
+            countHiver = 560;
         }
         public static void DiscoverLand()
         {
@@ -71,7 +85,7 @@ namespace TravailPratique
                 int number = rnd.Next(1, 7);
                 grid[posY, posX] = number;
             }
-            if(posY == 0 && posX == 0)
+            if (posY == 0 && posX == 0)
             {
                 grid[posY, posX] = 0;
             }
@@ -87,7 +101,7 @@ namespace TravailPratique
         }
         public static void MoveDown()
         {
-           
+
             if (posY < grid.GetLength(0) - 1)
             {
                 posY++;
@@ -96,7 +110,7 @@ namespace TravailPratique
         }
         public static void MoveLeft()
         {
-            
+
             if (posX > 0)
             {
                 posX--;
@@ -105,7 +119,7 @@ namespace TravailPratique
         }
         public static void MoveRight()
         {
-            
+
             if (posX < grid.GetLength(0) - 1)
             {
                 posX++;
@@ -113,43 +127,42 @@ namespace TravailPratique
             }
         }
 
-        public static int Collect(int[,] grid)
+        public static void Collect()
         {
-            switch(grid[posY, posX])
+            switch (grid[posY, posX])
             {
                 case MARAIS:
                     countMarais++;
-                    return countMarais;
+                    return;
                 case FORET:
                     countForet++;
-                    return countForet;
+                    return;
                 case PRAIRIE:
                     countPrairie++;
-                    return countPrairie;
+                    return;
                 case MONTAGNE:
                     countMontagne++;
-                    return countMontagne;
+                    return;
                 case RIVIERE:
                     countRiviere++;
-                    return countRiviere;
+                    return;
                 case DESERT:
                     countDesert++;
-                    return countDesert;
-                default: return 0;
+                    return;
             }
         }
-        public static int Tools(ConsoleKeyInfo input)
+        public static void Tools(ConsoleKeyInfo input)
         {
             switch (input.Key)
             {
                 case ConsoleKey.D1:
-                    if(countForet >= 2 && countRiviere >= 1)
+                    if (countForet >= 2 && countRiviere >= 1)
                     {
                         countFeu++;
                         countForet -= 2;
                         countRiviere--;
                     }
-                        return countFeu;
+                    return;
                 case ConsoleKey.D2:
                     if (countForet >= 1 && countMontagne >= 1)
                     {
@@ -157,7 +170,7 @@ namespace TravailPratique
                         countForet--;
                         countMontagne--;
                     }
-                    return countHache;
+                    return;
                 case ConsoleKey.D3:
                     if (countDesert >= 5 && countFeu >= 1)
                     {
@@ -165,7 +178,7 @@ namespace TravailPratique
                         countDesert -= 5;
                         countFeu--;
                     }
-                    return countVitre;
+                    return;
                 case ConsoleKey.D4:
                     if (countForet >= 4 && countHache >= 1)
                     {
@@ -173,7 +186,7 @@ namespace TravailPratique
                         countForet -= 4;
                         countHache--;
                     }
-                    return countPlanche;
+                    return;
                 case ConsoleKey.D5:
                     if (countMarais >= 3 && countFeu >= 1)
                     {
@@ -181,14 +194,14 @@ namespace TravailPratique
                         countMarais -= 3;
                         countFeu--;
                     }
-                    return countBrique;
+                    return;
                 case ConsoleKey.D6:
                     if (countPrairie >= 3)
                     {
                         countIsolant++;
                         countPrairie -= 3;
                     }
-                    return countIsolant;
+                    return;
                 case ConsoleKey.D7:
                     if (countPlanche >= 4 && countBrique >= 4 && countIsolant >= 4 && countVitre >= 2)
                     {
@@ -198,17 +211,39 @@ namespace TravailPratique
                         countIsolant -= 4;
                         countVitre -= 2;
                     }
-                    return countMaison;
-                default: return 0;
-
+                    return;
             }
         }
-        
+
         public static int WinterTimer()
         {
             return countHiver--;
-             
         }
-         
+        public static bool IsGameWon()
+        {
+            return countMaison > 0;
+        }
+
+        public static void Backup()
+        {
+            File.WriteAllText("backup.text", $"{posY},{posX},{countMarais},{countPrairie},{countRiviere},{countMontagne},{countForet},{countDesert},{countFeu},{countBrique},{countHache},{countMaison},{countIsolant},{countPlanche},{countVitre},{countHiver}\n");
+            string[,] gridValues = new string[10,10];
+            for (int y = 0; y < grid.GetLength(0); y++)
+            {
+                for (int x = 0; x < grid.GetLength(1); x++)
+                {
+                    gridValues[y,x] = Convert.ToString(grid[y, x]);
+                    File.AppendAllText("backup.text", $"{gridValues[y, x]},");
+                }
+                Console.Write("\n");
+            }
+                    
+        }
+
+        public static void Backupfile()
+        {
+            string contenu = File.ReadAllText("backup.text");
+            string[] phrase = contenu.Split("\n");
+        }
     }
 }

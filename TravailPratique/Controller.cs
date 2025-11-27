@@ -26,9 +26,11 @@ namespace TravailPratique
                         GameController();
                         break;
                     case "2":
+                        Game.Backupfile();
                         GameController();
                         break;
                     case "3":
+                        Game.Backup();
                         break;
                     case "4":
                         View.DisplayCredits();
@@ -72,7 +74,7 @@ namespace TravailPratique
                             Game.WinterTimer();
                             break;
                         case ConsoleKey.Spacebar:
-                            Game.Collect(Game.grid);
+                            Game.Collect();
                             Game.WinterTimer();
                             break;
                         case ConsoleKey.Enter:
@@ -86,15 +88,19 @@ namespace TravailPratique
                             }
                             break;
                         case ConsoleKey.Escape:
-                            Game.WinterTimer();
                             return;
                     }
                 }
                 else
                 {
-                    SuccessController();
+                    View.DisplayGameOver();
+                    return;
                 }
-
+                if (Game.IsGameWon())
+                {
+                    View.Succeed();
+                    return;
+                }
             }
 
         }
@@ -107,8 +113,7 @@ namespace TravailPratique
                 View.DisplayMaterial();
                 ConsoleKeyInfo input = Console.ReadKey();
                 Game.Tools(input);
-                View.Succeed();
-                if (input.Key == ConsoleKey.Enter)
+                if (input.Key == ConsoleKey.Enter || Game.IsGameWon())
                 {
                     return;
                 }
@@ -126,16 +131,7 @@ namespace TravailPratique
                 {
                     return;
                 }
-            }
-        }
-
-        public static void SuccessController()
-        {
-            while (true) 
-            {
-                return;
-            }
-            
+            } 
         }
     }
 }

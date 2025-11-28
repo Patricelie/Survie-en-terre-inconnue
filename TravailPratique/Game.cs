@@ -226,8 +226,11 @@ namespace TravailPratique
 
         public static void Backup()
         {
-            File.WriteAllText("backup.text", $"{posY},{posX},{countMarais},{countPrairie},{countRiviere},{countMontagne},{countForet},{countDesert},{countFeu},{countBrique},{countHache},{countMaison},{countIsolant},{countPlanche},{countVitre},{countHiver}\n");
-            string[,] gridValues = new string[10,10];
+            int[] backupCounter = {posY,posX,countMarais,countPrairie,countRiviere,countMontagne,countForet,countDesert,countFeu,countBrique,countHache,countMaison,countIsolant,countPlanche,countVitre,countHiver};
+            string counter = string.Join(",", backupCounter);
+            File.WriteAllText("backup.text", $"{counter}\n");
+
+            string[,] gridValues = new string[10, 10];
             for (int y = 0; y < grid.GetLength(0); y++)
             {
                 for (int x = 0; x < grid.GetLength(1); x++)
@@ -235,15 +238,19 @@ namespace TravailPratique
                     gridValues[y,x] = Convert.ToString(grid[y, x]);
                     File.AppendAllText("backup.text", $"{gridValues[y, x]},");
                 }
-                Console.Write("\n");
+                File.AppendAllText("backup.text", "\n");
             }
                     
         }
 
         public static void Backupfile()
         {
-            string contenu = File.ReadAllText("backup.text");
-            string[] phrase = contenu.Split("\n");
+            string content = File.ReadAllText("backup.text");
+            string[] dividedContent = content.Split("\n");
+            for (int i = 0; i < dividedContent.Length; i++)
+            {
+                string[] text = dividedContent[i].Split(",");
+            }
         }
     }
 }

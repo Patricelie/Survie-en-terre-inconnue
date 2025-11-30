@@ -29,6 +29,7 @@ namespace TravailPratique
         public static int countIsolant = 0;
         public static int countMaison = 0;
         public static int countHiver = 560;
+        public static int[,] saveGrid = new int[10, 10]; 
         public static int[,] grid =
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -245,11 +246,44 @@ namespace TravailPratique
 
         public static void Backupfile()
         {
-            string content = File.ReadAllText("backup.text");
-            string[] dividedContent = content.Split("\n");
-            for (int i = 0; i < dividedContent.Length; i++)
+            string[] content = File.ReadAllLines("backup.text");
+
+            string counter = content[0].Trim();
+            string[] counterDivided = counter.Split(",");
+            for (int j = 0; j < counterDivided.Length; j++)
             {
-                string[] text = dividedContent[i].Split(",");
+                posY = Convert.ToInt32(counterDivided[0]);
+                posX = Convert.ToInt32(counterDivided[1]);
+                countMarais = Convert.ToInt32(counterDivided[2]);
+                countPrairie = Convert.ToInt32(counterDivided[3]);
+                countRiviere = Convert.ToInt32(counterDivided[4]);
+                countMontagne = Convert.ToInt32(counterDivided[5]);
+                countForet = Convert.ToInt32(counterDivided[6]);
+                countDesert = Convert.ToInt32(counterDivided[7]);
+                countFeu = Convert.ToInt32(counterDivided[8]);
+                countBrique = Convert.ToInt32(counterDivided[9]);
+                countHache = Convert.ToInt32(counterDivided[10]);
+                countMaison = Convert.ToInt32(counterDivided[11]);
+                countIsolant = Convert.ToInt32(counterDivided[12]);
+                countPlanche = Convert.ToInt32(counterDivided[13]);
+                countVitre = Convert.ToInt32(counterDivided[14]);
+                countHiver = Convert.ToInt32(counterDivided[15]);
+            }
+
+            for (int i = 1; i < content.Length; i++)
+            {
+                string ligne = content[i].Trim();
+                string[] lignes = ligne.Split(",");
+                for (int range = 0; range < 9; range++)
+                {
+                    for (int l = 0; l < lignes.Length; l++)
+                    {
+                        if (int.TryParse(lignes[l], out int nombre))
+                        {
+                            saveGrid[range, l] = Convert.ToInt32(lignes[l]);
+                        }
+                    }
+                }
             }
         }
     }

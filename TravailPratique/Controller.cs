@@ -31,6 +31,8 @@ namespace TravailPratique
                         break;
                     case "3":
                         Game.Backup();
+                        View.saveGame();
+                        ConsoleKeyInfo toucheSave = Console.ReadKey();
                         break;
                     case "4":
                         View.DisplayCredits();

@@ -169,5 +169,11 @@ namespace TravailPratique
             Console.WriteLine("Vous avez perdu le jeu car l'hiver est arrivé");
             Console.ReadKey();
         }
+
+        public static void saveGame()
+        {
+            Console.WriteLine("Partie sauvegardée avec succès.");
+            Console.WriteLine("Apuyez sur une touche pour continuer.");
+        }
     }
 }

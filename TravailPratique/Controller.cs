@@ -12,6 +12,9 @@ namespace TravailPratique
 {
     internal class Controller
     {
+        /// <summary>
+        /// Contrôle le menu du jeu.
+        /// </summary>
         public static void MenuController()
         {
             while (true)
@@ -31,13 +34,12 @@ namespace TravailPratique
                         break;
                     case "3":
                         Game.Backup();
-                        View.saveGame();
+                        View.SaveGame();
                         ConsoleKeyInfo toucheSave = Console.ReadKey();
                         break;
                     case "4":
                         View.DisplayCredits();
                         ConsoleKeyInfo touche = Console.ReadKey();
-
                         break;
                     case "5":
                         Console.Clear();
@@ -47,13 +49,17 @@ namespace TravailPratique
 
             }
         }
+
+        /// <summary>
+        /// Contrôle le jeu.
+        /// </summary>
         public static void GameController()
         {
             while (true)
             {
                 Console.Clear();
                 View.DisplayGameMenu();
-                View.DisplayGrid(Game.saveGrid, Game.posY, Game.posX);
+                View.DisplayGrid(Game.grid, Game.posY, Game.posX);
                 ConsoleKeyInfo input = Console.ReadKey();
                 if (Game.countHiver > 0)
                 {
@@ -107,6 +113,9 @@ namespace TravailPratique
 
         }
 
+        /// <summary>
+        /// Contrôle l'affichage des matériaux.
+        /// </summary>
         public static void BuildController()
         {
             while (true)
@@ -122,6 +131,9 @@ namespace TravailPratique
             }
         }
 
+        /// <summary>
+        /// Contrôle la fabrication des matériaux.
+        /// </summary>
         public static void MenuGameController()
         {
             while (true)

@@ -9,27 +9,26 @@ namespace TravailPratique
 {
     internal class Game
     {
-        public const int MARAIS = 1;
-        public const int FORET = 2;
-        public const int MONTAGNE = 3;
+        public const int Swamp = 1;
+        public const int Forest = 2;
+        public const int Mountain = 3;
         public const int RIVIERE = 4;
         public const int PRAIRIE = 5;
         public const int DESERT = 6;
-        public static int countMarais = 0;
-        public static int countForet = 0;
-        public static int countMontagne = 0;
+        public static int countSwamp = 0;
+        public static int countForest = 0;
+        public static int countMountain = 0;
         public static int countRiviere = 0;
         public static int countPrairie = 0;
         public static int countDesert = 0;
-        public static int countFeu = 0;
-        public static int countHache = 0;
-        public static int countVitre = 0;
-        public static int countPlanche = 0;
-        public static int countBrique = 0;
-        public static int countIsolant = 0;
-        public static int countMaison = 0;
+        public static int countFire = 0;
+        public static int countAxe = 0;
+        public static int countWindowpane = 0;
+        public static int countBoard = 0;
+        public static int countBrick = 0;
+        public static int countInsulating = 0;
+        public static int countHouse = 0;
         public static int countHiver = 560;
-        public static int[,] saveGrid = new int[10, 10]; 
         public static int[,] grid =
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -46,6 +45,10 @@ namespace TravailPratique
         public static int posX = 0;
         public static int posY = 0;
         public static Random rnd = new Random();
+
+        /// <summary>
+        /// Initialise la grille de jeu.
+        /// </summary>
         public static void InitializeGame()
         {
             posX = 0;
@@ -63,21 +66,25 @@ namespace TravailPratique
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             };
-            countMarais = 0;
-            countForet = 0;
-            countMontagne = 0;
+            countSwamp = 0;
+            countForest = 0;
+            countMountain = 0;
             countRiviere = 0;
             countPrairie = 0;
             countDesert = 0;
-            countFeu = 0;
-            countHache = 0;
-            countVitre = 0;
-            countPlanche = 0;
-            countBrique = 0;
-            countIsolant = 0;
-            countMaison = 0;
-            countHiver = 560;
+            countFire = 0;
+            countAxe = 0;
+            countWindowpane = 0;
+            countBoard = 0;
+            countBrick = 0;
+            countInsulating = 0;
+            countHouse = 0;
+            countHiver = 300;
         }
+
+        /// <summary>
+        /// Assigne un nombre aléatoire à chaque case de la grille.
+        /// </summary>
         public static void DiscoverLand()
         {
 
@@ -92,6 +99,9 @@ namespace TravailPratique
             }
         }
 
+        /// <summary>
+        /// Permet le déplacement du joueur.
+        /// </summary>
         public static void MoveUp()
         {
             if (posY > 0)
@@ -100,6 +110,7 @@ namespace TravailPratique
                 DiscoverLand();
             }
         }
+
         public static void MoveDown()
         {
 
@@ -109,6 +120,7 @@ namespace TravailPratique
                 DiscoverLand();
             }
         }
+
         public static void MoveLeft()
         {
 
@@ -118,6 +130,7 @@ namespace TravailPratique
                 DiscoverLand();
             }
         }
+
         public static void MoveRight()
         {
 
@@ -128,21 +141,24 @@ namespace TravailPratique
             }
         }
 
+        /// <summary>
+        /// Collecte des ressources.
+        /// </summary>
         public static void Collect()
         {
             switch (grid[posY, posX])
             {
-                case MARAIS:
-                    countMarais++;
+                case Swamp:
+                    countSwamp++;
                     return;
-                case FORET:
-                    countForet++;
+                case Forest:
+                    countForest++;
                     return;
                 case PRAIRIE:
                     countPrairie++;
                     return;
-                case MONTAGNE:
-                    countMontagne++;
+                case Mountain:
+                    countMountain++;
                     return;
                 case RIVIERE:
                     countRiviere++;
@@ -152,82 +168,98 @@ namespace TravailPratique
                     return;
             }
         }
+        /// <summary>
+        /// Construction des matériaux.
+        /// </summary>
         public static void Tools(ConsoleKeyInfo input)
         {
             switch (input.Key)
             {
                 case ConsoleKey.D1:
-                    if (countForet >= 2 && countRiviere >= 1)
+                    if (countForest >= 2 && countRiviere >= 1)
                     {
-                        countFeu++;
-                        countForet -= 2;
+                        countFire++;
+                        countForest -= 2;
                         countRiviere--;
+                        WinterTimer();
                     }
                     return;
                 case ConsoleKey.D2:
-                    if (countForet >= 1 && countMontagne >= 1)
+                    if (countForest >= 1 && countMountain >= 1)
                     {
-                        countHache++;
-                        countForet--;
-                        countMontagne--;
+                        countAxe++;
+                        countForest--;
+                        countMountain--;
+                        WinterTimer();
                     }
                     return;
                 case ConsoleKey.D3:
-                    if (countDesert >= 5 && countFeu >= 1)
+                    if (countDesert >= 5 && countFire >= 1)
                     {
-                        countVitre++;
+                        countWindowpane++;
                         countDesert -= 5;
-                        countFeu--;
+                        countFire--;
+                        WinterTimer();
                     }
                     return;
                 case ConsoleKey.D4:
-                    if (countForet >= 4 && countHache >= 1)
+                    if (countForest >= 4 && countAxe >= 1)
                     {
-                        countPlanche++;
-                        countForet -= 4;
-                        countHache--;
+                        countBoard++;
+                        countForest -= 4;
+                        countAxe--;
+                        WinterTimer();
                     }
                     return;
                 case ConsoleKey.D5:
-                    if (countMarais >= 3 && countFeu >= 1)
+                    if (countSwamp >= 3 && countFire >= 1)
                     {
-                        countBrique++;
-                        countMarais -= 3;
-                        countFeu--;
+                        countBrick++;
+                        countSwamp -= 3;
+                        countFire--;
+                        WinterTimer();
                     }
                     return;
                 case ConsoleKey.D6:
                     if (countPrairie >= 3)
                     {
-                        countIsolant++;
+                        countInsulating++;
                         countPrairie -= 3;
+                        WinterTimer();
                     }
                     return;
                 case ConsoleKey.D7:
-                    if (countPlanche >= 4 && countBrique >= 4 && countIsolant >= 4 && countVitre >= 2)
+                    if (countBoard >= 4 && countBrick >= 4 && countInsulating >= 4 && countWindowpane >= 2)
                     {
-                        countMaison++;
-                        countPlanche -= 4;
-                        countBrique -= 4;
-                        countIsolant -= 4;
-                        countVitre -= 2;
+                        countHouse++;
+                        countBoard -= 4;
+                        countBrick -= 4;
+                        countInsulating -= 4;
+                        countWindowpane -= 2;
+                        WinterTimer();
                     }
                     return;
             }
         }
 
+        /// <summary>
+        /// Représente le compteur avant l'hiver.
+        /// </summary>
         public static int WinterTimer()
         {
             return countHiver--;
         }
         public static bool IsGameWon()
         {
-            return countMaison > 0;
+            return countHouse > 0;
         }
 
+        /// <summary>
+        /// Sauvegarde une partie.
+        /// </summary>
         public static void Backup()
         {
-            int[] backupCounter = {posY,posX,countMarais,countPrairie,countRiviere,countMontagne,countForet,countDesert,countFeu,countBrique,countHache,countMaison,countIsolant,countPlanche,countVitre,countHiver};
+            int[] backupCounter = {posY,posX,countSwamp,countPrairie,countRiviere,countMountain,countForest,countDesert,countFire,countBrick,countAxe,countHouse,countInsulating,countBoard,countWindowpane,countHiver};
             string counter = string.Join(",", backupCounter);
             File.WriteAllText("backup.text", $"{counter}\n");
 
@@ -240,33 +272,36 @@ namespace TravailPratique
                     File.AppendAllText("backup.text", $"{gridValues[y, x]},");
                 }
                 File.AppendAllText("backup.text", "\n");
-            }
-                    
+            }     
         }
 
+        /// <summary>
+        /// Charge une partie.
+        /// </summary>
         public static void Backupfile()
         {
+            int[,] saveGrid = new int[10, 10];
             string[] content = File.ReadAllLines("backup.text");
-
             string counter = content[0].Trim();
             string[] counterDivided = counter.Split(",");
+
             for (int j = 0; j < counterDivided.Length; j++)
             {
                 posY = Convert.ToInt32(counterDivided[0]);
                 posX = Convert.ToInt32(counterDivided[1]);
-                countMarais = Convert.ToInt32(counterDivided[2]);
+                countSwamp = Convert.ToInt32(counterDivided[2]);
                 countPrairie = Convert.ToInt32(counterDivided[3]);
                 countRiviere = Convert.ToInt32(counterDivided[4]);
-                countMontagne = Convert.ToInt32(counterDivided[5]);
-                countForet = Convert.ToInt32(counterDivided[6]);
+                countMountain = Convert.ToInt32(counterDivided[5]);
+                countForest = Convert.ToInt32(counterDivided[6]);
                 countDesert = Convert.ToInt32(counterDivided[7]);
-                countFeu = Convert.ToInt32(counterDivided[8]);
-                countBrique = Convert.ToInt32(counterDivided[9]);
-                countHache = Convert.ToInt32(counterDivided[10]);
-                countMaison = Convert.ToInt32(counterDivided[11]);
-                countIsolant = Convert.ToInt32(counterDivided[12]);
-                countPlanche = Convert.ToInt32(counterDivided[13]);
-                countVitre = Convert.ToInt32(counterDivided[14]);
+                countFire = Convert.ToInt32(counterDivided[8]);
+                countBrick = Convert.ToInt32(counterDivided[9]);
+                countAxe = Convert.ToInt32(counterDivided[10]);
+                countHouse = Convert.ToInt32(counterDivided[11]);
+                countInsulating = Convert.ToInt32(counterDivided[12]);
+                countBoard = Convert.ToInt32(counterDivided[13]);
+                countWindowpane = Convert.ToInt32(counterDivided[14]);
                 countHiver = Convert.ToInt32(counterDivided[15]);
             }
 
@@ -274,6 +309,7 @@ namespace TravailPratique
             {
                 string ligne = content[i].Trim();
                 string[] lignes = ligne.Split(',');
+
                 for (int range = 0; range < 9; range++)
                 {
                     for (int l = 0; l < lignes.Length; l++)
@@ -285,7 +321,6 @@ namespace TravailPratique
                     }
                 }
             }
-
         }
     }
 }

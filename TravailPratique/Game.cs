@@ -171,6 +171,7 @@ namespace TravailPratique
         /// <summary>
         /// Construction des matériaux.
         /// </summary>
+        /// <param name="input">Touche appuyée par le joueur.</param>
         public static void Tools(ConsoleKeyInfo input)
         {
             switch (input.Key)

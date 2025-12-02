@@ -119,6 +119,9 @@ namespace TravailPratique
         /// <summary>
         /// Affiche la grille.
         /// </summary>
+        /// <param name="posY">Position en Y du joueur</param>
+        /// <param name="posX">Position en X du joueur</param>
+        /// <param name="grid">Grille de points</param>
         public static void DisplayGrid(int[,] grid, int posY, int posX)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -144,6 +147,7 @@ namespace TravailPratique
         /// <summary>
         /// Génère la couleur.
         /// </summary>
+        /// <param name="color">Couleur du terrain</param>
         public static ConsoleColor GenerateColor(int color)
         {
             switch (color)
@@ -161,6 +165,7 @@ namespace TravailPratique
         /// <summary>
         /// Affiche le nom et une réprésentation du terrain.
         /// </summary>
+        /// <param name="grid">Grille de points</param>
         public static String DisplayNameField(int[,] grid)
         {
             switch (Game.grid[Game.posY, Game.posX])

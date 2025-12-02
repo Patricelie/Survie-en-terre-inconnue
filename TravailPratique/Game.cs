@@ -273,14 +273,14 @@ namespace TravailPratique
             for (int i = 1; i < content.Length; i++)
             {
                 string ligne = content[i].Trim();
-                string[] lignes = ligne.Split(",");
+                string[] lignes = ligne.Split(',');
                 for (int range = 0; range < 9; range++)
                 {
                     for (int l = 0; l < lignes.Length; l++)
                     {
-                        if (int.TryParse(lignes[l], out int nombre))
+                        if (Int32.TryParse(lignes[l], out int nombre))
                         {
-                            saveGrid[range, l] = Convert.ToInt32(lignes[l]);
+                            saveGrid[range, l] = nombre;
                         }
                     }
                 }

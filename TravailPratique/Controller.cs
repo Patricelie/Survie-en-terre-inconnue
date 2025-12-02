@@ -53,7 +53,7 @@ namespace TravailPratique
             {
                 Console.Clear();
                 View.DisplayGameMenu();
-                View.DisplayGrid(Game.grid, Game.posY, Game.posX);
+                View.DisplayGrid(Game.saveGrid, Game.posY, Game.posX);
                 ConsoleKeyInfo input = Console.ReadKey();
                 if (Game.countHiver > 0)
                 {

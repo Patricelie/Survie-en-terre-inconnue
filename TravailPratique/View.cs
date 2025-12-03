@@ -108,12 +108,12 @@ namespace TravailPratique
             Console.WriteLine("-----------------------");
             Console.WriteLine("1. Feu: 2 Bois, 1 Silex");
             Console.WriteLine("2. Hache: 1 Bois, 1 Fer");
-            Console.WriteLine("3. Vitre: 5 Sable, 1 Fire");
-            Console.WriteLine("4. Planche: 4 Bois, 1 Axe");
-            Console.WriteLine("5. Brique: 3 Argile, 1 Fire");
+            Console.WriteLine("3. Vitre: 5 Sable, 1 Feu");
+            Console.WriteLine("4. Planche: 4 Bois, 1 Hache");
+            Console.WriteLine("5. Brique: 3 Argile, 1 Feu");
             Console.WriteLine("6. Isolant: 3 Herbe");
             Console.WriteLine("7. Maison: 4 Planches, 4 Briques, 4 Isolants, 2 Vitres");
-            Console.WriteLine("Choisissez un objet à faBrickr (ou appuyez sur Entrée pour annuler):");
+            Console.WriteLine("Choisissez un objet à fabriquer (ou appuyez sur Entrée pour annuler):");
         }
 
         /// <summary>
@@ -248,6 +248,11 @@ namespace TravailPratique
                         "\r\n██   ██║██║   ██║██║   ██║██╔══╝                                                           " +
                         "\r\n╚█████╔╝╚██████╔╝╚██████╔╝███████╗                                                         " +
                         "\r\n ╚════╝  ╚═════╝  ╚═════╝ ╚══════╝                                                         ");
+        }
+        public static void ValidOption()
+        {
+            Console.WriteLine("Faites un choix de 1 à 5");
+            Console.WriteLine("Appuyez sur une touche pour continuer...");
         }
     }
 }

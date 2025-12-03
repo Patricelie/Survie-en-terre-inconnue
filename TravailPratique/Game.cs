@@ -9,26 +9,46 @@ namespace TravailPratique
 {
     internal class Game
     {
+        /// <value>Numéro du marais.</value>
         public const int Swamp = 1;
+        /// <value>Numéro de la forêt.</value>
         public const int Forest = 2;
+        /// <value>Numéro de la montagne.</value>
         public const int Mountain = 3;
+        /// <value>Numéro de la rivière.</value>
         public const int RIVIERE = 4;
+        /// <value>Numéro de la prairie.</value>
         public const int PRAIRIE = 5;
+        /// <value>Numéro de la forêt.</value>
         public const int DESERT = 6;
+        /// <value>Conteur marais.</value>
         public static int countSwamp = 0;
+        /// <value>Conteur Forêt.</value>
         public static int countForest = 0;
+        /// <value>Conteur montagne.</value>
         public static int countMountain = 0;
+        /// <value>Conteur rivière.</value>
         public static int countRiviere = 0;
+        /// <value>Conteur prairie.</value>
         public static int countPrairie = 0;
+        /// <value>Conteur desert.</value>
         public static int countDesert = 0;
+        /// <value>Conteur feu.</value>
         public static int countFire = 0;
+        /// <value>Conteur hache.</value>
         public static int countAxe = 0;
+        /// <value>Conteur vitre.</value>
         public static int countWindowpane = 0;
+        /// <value>Conteur planche.</value>
         public static int countBoard = 0;
+        /// <value>Conteur brique.</value>
         public static int countBrick = 0;
+        /// <value>Conteur isolant.</value>
         public static int countInsulating = 0;
+        /// <value>Conteur maison.</value>
         public static int countHouse = 0;
-        public static int countHiver = 560;
+        /// <value>Conteur avant l'hiver.</value>
+        public static int countHiver = 200;
         public static int[,] grid =
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -79,7 +99,7 @@ namespace TravailPratique
             countBrick = 0;
             countInsulating = 0;
             countHouse = 0;
-            countHiver = 300;
+            countHiver = 200;
         }
 
         /// <summary>
@@ -281,46 +301,47 @@ namespace TravailPratique
         /// </summary>
         public static void Backupfile()
         {
-            int[,] saveGrid = new int[10, 10];
-            string[] content = File.ReadAllLines("backup.text");
-            string counter = content[0].Trim();
-            string[] counterDivided = counter.Split(",");
-
-            for (int j = 0; j < counterDivided.Length; j++)
+            try
             {
-                posY = Convert.ToInt32(counterDivided[0]);
-                posX = Convert.ToInt32(counterDivided[1]);
-                countSwamp = Convert.ToInt32(counterDivided[2]);
-                countPrairie = Convert.ToInt32(counterDivided[3]);
-                countRiviere = Convert.ToInt32(counterDivided[4]);
-                countMountain = Convert.ToInt32(counterDivided[5]);
-                countForest = Convert.ToInt32(counterDivided[6]);
-                countDesert = Convert.ToInt32(counterDivided[7]);
-                countFire = Convert.ToInt32(counterDivided[8]);
-                countBrick = Convert.ToInt32(counterDivided[9]);
-                countAxe = Convert.ToInt32(counterDivided[10]);
-                countHouse = Convert.ToInt32(counterDivided[11]);
-                countInsulating = Convert.ToInt32(counterDivided[12]);
-                countBoard = Convert.ToInt32(counterDivided[13]);
-                countWindowpane = Convert.ToInt32(counterDivided[14]);
-                countHiver = Convert.ToInt32(counterDivided[15]);
-            }
+                string[] content = File.ReadAllLines("backup.text");
+                string counter = content[0].Trim();
+                string[] counterDivided = counter.Split(",");
 
-            for (int i = 1; i < content.Length; i++)
-            {
-                string ligne = content[i].Trim();
-                string[] lignes = ligne.Split(',');
-
-                for (int range = 0; range < 9; range++)
+                for (int j = 0; j < counterDivided.Length; j++)
                 {
-                    for (int l = 0; l < lignes.Length; l++)
+                    posY = Convert.ToInt32(counterDivided[0]);
+                    posX = Convert.ToInt32(counterDivided[1]);
+                    countSwamp = Convert.ToInt32(counterDivided[2]);
+                    countPrairie = Convert.ToInt32(counterDivided[3]);
+                    countRiviere = Convert.ToInt32(counterDivided[4]);
+                    countMountain = Convert.ToInt32(counterDivided[5]);
+                    countForest = Convert.ToInt32(counterDivided[6]);
+                    countDesert = Convert.ToInt32(counterDivided[7]);
+                    countFire = Convert.ToInt32(counterDivided[8]);
+                    countBrick = Convert.ToInt32(counterDivided[9]);
+                    countAxe = Convert.ToInt32(counterDivided[10]);
+                    countHouse = Convert.ToInt32(counterDivided[11]);
+                    countInsulating = Convert.ToInt32(counterDivided[12]);
+                    countBoard = Convert.ToInt32(counterDivided[13]);
+                    countWindowpane = Convert.ToInt32(counterDivided[14]);
+                    countHiver = Convert.ToInt32(counterDivided[15]);
+                }
+
+                for (int i = 1; i < content.Length; i++)
+                {
+                    string[] cols = content[i].Trim().Split(',');
+                    for (int l = 0; l < cols.Length; l++)
                     {
-                        if (Int32.TryParse(lignes[l], out int nombre))
+                        if (Int32.TryParse(cols[l], out int nombre))
                         {
-                            saveGrid[range, l] = nombre;
+                            grid[i, l] = nombre;
                         }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Erreur lors du chargement : {e}");
             }
         }
     }

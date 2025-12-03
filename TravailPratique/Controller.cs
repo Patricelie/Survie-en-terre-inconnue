@@ -45,6 +45,11 @@ namespace TravailPratique
                         Console.Clear();
                         View.EndGame();
                         return;
+                    default:
+                        View.ValidOption();
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
                 }
 
             }

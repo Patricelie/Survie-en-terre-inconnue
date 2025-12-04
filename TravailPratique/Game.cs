@@ -334,7 +334,7 @@ namespace TravailPratique
                     {
                         if (Int32.TryParse(cols[l], out int nombre))
                         {
-                            grid[i, l] = nombre;
+                            grid[i - 1, l] = nombre;
                         }
                     }
                 }

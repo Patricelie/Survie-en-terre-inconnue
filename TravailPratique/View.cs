@@ -65,7 +65,7 @@ namespace TravailPratique
             Console.WriteLine("Inventaire du Joueur");
             Console.WriteLine("--------Ressources---------------");
             Console.WriteLine($"Fer:{Game.countMountain}");
-            Console.WriteLine($"Silex:{Game.countRiviere}");
+            Console.WriteLine($"Silex:{Game.countRiver}");
             Console.WriteLine($"Bois:{Game.countForest}");
             Console.WriteLine($"Argile:{Game.countSwamp}");
             Console.WriteLine($"Herbe:{Game.countPrairie}");
@@ -92,7 +92,7 @@ namespace TravailPratique
             Console.WriteLine($"Il vous reste {Game.countHiver} actions avant l'hiver.");
             Console.WriteLine("--------Ressources---------------");
             Console.WriteLine($"Fer:{Game.countMountain}");
-            Console.WriteLine($"Silex:{Game.countRiviere}");
+            Console.WriteLine($"Silex:{Game.countRiver}");
             Console.WriteLine($"Bois:{Game.countForest}");
             Console.WriteLine($"Argile:{Game.countSwamp}");
             Console.WriteLine($"Herbe:{Game.countPrairie}");
@@ -125,6 +125,7 @@ namespace TravailPratique
         public static void DisplayGrid(int[,] grid, int posY, int posX)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             for (int y = 0; y < grid.GetLength(0); y++)
             {
                 for (int x = 0; x < grid.GetLength(1); x++)
@@ -156,7 +157,7 @@ namespace TravailPratique
                 case Game.Forest: return ConsoleColor.DarkGreen;
                 case Game.DESERT: return ConsoleColor.Yellow;
                 case Game.Mountain: return ConsoleColor.Gray;
-                case Game.RIVIERE: return ConsoleColor.Blue;
+                case Game.RIVER: return ConsoleColor.Blue;
                 case Game.PRAIRIE: return ConsoleColor.Green;
                 default: return ConsoleColor.Black;
             }
@@ -171,18 +172,68 @@ namespace TravailPratique
             switch (Game.grid[Game.posY, Game.posX])
             {
                 case Game.Swamp:
-                    return "Marais \n ^  ^  ^   ^         \r\n/|\\/|\\/|\\ /|\\      \r\n/|\\/|\\/|\\ /|\\      \r\n/|\\/|\\/|\\ /|\\ \r\n^\"~-,._.,-~\"^\"~-,._\\/,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._";
+                    return "Marais \n ^  ^  ^   ^         " +
+                                "\r\n/|\\/|\\/|\\ /|\\      " +
+                                "\r\n/|\\/|\\/|\\ /|\\      " +
+                                "\r\n/|\\/|\\/|\\ /|\\ " +
+                                "\r\n^\"~-,._.,-~\"^\"~-,._\\/,._.,-~\"^\"~-,._.,-~\"^\"~-,._" +
+                                "\r\n~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._" +
+                                "\r\n^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._" +
+                                "\r\n~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._";
                 case Game.Forest:
-                    return "Forêt \n ^  ^   ^  ^  ^   ^  ^\r\n/|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n/|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n/|\\/|\\ /|\\/|\\/|\\ /|\\/|\\";
+                    return "Forêt \n ^  ^   ^  ^  ^   ^  ^" +
+                            "\r\n/|\\/|\\ /|\\/|\\/|\\ /|\\/|\\" +
+                            "\r\n/|\\/|\\ /|\\/|\\/|\\ /|\\/|\\" +
+                            "\r\n/|\\/|\\ /|\\/|\\/|\\ /|\\/|\\";
                 case Game.PRAIRIE:
-                    return "Prairie \n                     _\r\n                  _(_)_                          wWWWw   _\r\n      @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_\r\n     @@()@@ wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)\r\n      @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\\r\n       /      Y       \\|    \\|/    /(_)    \\|      |/      |\r\n    \\ |     \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/\r\njgs \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|// \r\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^";
+                    return "Prairie \n                     _" +
+                        "\r\n                  _(_)_                          wWWWw   _" +
+                        "\r\n      @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_" +
+                        "\r\n     @@()@@ wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)" +
+                        "\r\n      @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\" +
+                        "\r\n       /      Y       \\|    \\|/    /(_)    \\|      |/      |" +
+                        "\r\n    \\ |     \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/" +
+                        "\r\n    \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|// " +
+                        "\r\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^";
                 case Game.Mountain:
-                    return "Montagne \n           ,                  /\\.__      _.-\\\r\n          /~\\,      __       /~    \\   ./    \\\r\n        ,/  /_\\   _/  \\    ,/~,_.~'\"\\ /_\\_  /'\\\r\n       / \\ /## \\ / V#\\/\\  /~8#  # ## V8  #\\/8 8\\\r\n     /~#'#\"#\"\"##V&#&# ##\\/88#\"#8# #\" #\\#&\"##\" ##\\\r\n    j# ##### #\"#\\&&\"####/###&  #\"#&## #&\" #\"#&#\"#'\\\r\n   /#\"#\"#####\"###'\\&##\"/&#\"####\"### # #&#&##\"#\"### \\\r\n  J#\"###\"#\"#\"#\"####'\\# #\"##\"#\"##\"#\"#####&\"## \"#\"&\"##|\\";
-                case Game.RIVIERE:
-                    return "Rivière \n ^\"~-,._.,-~\"^\"~-,._\\/,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._\r\n~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._";
+                    return "Montagne \n           ,                  /\\.__      _.-\\" +
+                        "\r\n          /~\\,      __       /~    \\   ./    \\" +
+                        "\r\n        ,/  /_\\   _/  \\    ,/~,_.~'\"\\ /_\\_  /'\\" +
+                        "\r\n       / \\ /## \\ / V#\\/\\  /~8#  # ## V8  #\\/8 8\\" +
+                        "\r\n     /~#'#\"#\"\"##V&#&# ##\\/88#\"#8# #\" #\\#&\"##\" ##\\" +
+                        "\r\n    j# ##### #\"#\\&&\"####/###&  #\"#&## #&\" #\"#&#\"#'\\" +
+                        "\r\n   /#\"#\"#####\"###'\\&##\"/&#\"####\"### # #&#&##\"#\"### \\" +
+                        "\r\n  J#\"###\"#\"#\"#\"####'\\# #\"##\"#\"##\"#\"#####&\"## \"#\"&\"##|\\";
+                case Game.RIVER:
+                    return "Rivière \n ^\"~-,._.,-~\"^\"~-,._\\/,._.,-~\"^\"~-,._.,-~\"^\"~-,._" +
+                        "\r\n~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._" +
+                        "\r\n^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._" +
+                        "\r\n~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._.,-~\"^\"~-,._";
                 case Game.DESERT:
-                    return "Désert \n          || |                               \r\n          || |   ,                          \r\n          || |  | |\r\n          || '--' |\r\n    ,,    || .----'\r\n   || |   || |\r\n   |  '---'| |\r\n   '------.| |                                  _____\r\n   ((_))  || |      (  _                       / /|\\ \\\r\n   (o o)  || |      ))(\"),                    | | | | |\r\n____\\_/___||_|_____((__^_))____________________\\_\\|/_/__";
-                default: return "Base \n  .-------------------.              ___\r\n(   I had a crash!    )            /  /]\r\n `-------------.   ,-'            /  / ]\r\n                \\ |      _____,. '  /__]\r\n             )   \\|   ,-'             _>\r\n               (  ` _/  AVION    ,. '`\r\n              )    / |     _,. '`\r\n              (   /. /    |\r\n               ) ,  /`  ./\r\n              (  \\_/   //_ _\r\n               ) /    //  (_)\r\n             _,~'#   (/.\r\n~~~~~~~~~~~~~~~#~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+                    return "Désert \n          || |                               " +
+                        "\r\n          || |   ,                         " +
+                        " \r\n          || |  | |" +
+                        "\r\n          || '--' |" +
+                        "\r\n    ,,    || .----'" +
+                        "\r\n   || |   || |" +
+                        "\r\n   |  '---'| |" +
+                        "\r\n   '------.| |                                  _____" +
+                        "\r\n   ((_))  || |      (  _                       / /|\\ \\" +
+                        "\r\n   (o o)  || |      ))(\"),                    | | | | |" +
+                        "\r\n____\\_/___||_|_____((__^_))____________________\\_\\|/_/__";
+                default: return "Base \n  .-------------------.              ___" +
+                        "\r\n(   I had a crash!    )            /  /]" +
+                        "\r\n `-------------.   ,-'            /  / ]" +
+                        "\r\n                \\ |      _____,. '  /__]" +
+                        "\r\n             )   \\|   ,-'             _>" +
+                        "\r\n               (  ` _/  AVION    ,. '`" +
+                        "\r\n              )    / |     _,. '`" +
+                        "\r\n              (   /. /    |" +
+                        "\r\n               ) ,  /`  ./" +
+                        "\r\n              (  \\_/   //_ _" +
+                        "\r\n               ) /    //  (_)" +
+                        "\r\n             _,~'#   (/." +
+                        "\r\n~~~~~~~~~~~~~~~#~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~";
             }
         }
 
@@ -199,7 +250,10 @@ namespace TravailPratique
                         "\r\n██████╔╝██║  ██║██║  ██║ ╚████╔╝ ╚██████╔╝██╗    ╚═╝    ██╔╝" +
                         "\r\n╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚═╝           ╚═╝ ");
             Console.WriteLine();
-            Console.WriteLine("  ___I_\r\n /\\-_--\\\r\n/  \\_-__\\\r\n|[]| [] |");
+            Console.WriteLine("  ___I_" +
+                        "\r\n /\\-_--\\" +
+                        "\r\n/  \\_-__\\" +
+                        "\r\n|[]| [] |");
             Console.WriteLine("Vous avez réussi à construire votre maison avant l'hiver.");
             Console.ReadKey();
         }
@@ -249,6 +303,10 @@ namespace TravailPratique
                         "\r\n╚█████╔╝╚██████╔╝╚██████╔╝███████╗                                                         " +
                         "\r\n ╚════╝  ╚═════╝  ╚═════╝ ╚══════╝                                                         ");
         }
+
+        /// <summary>
+        /// Valider le choix de l'utilisateur.
+        /// </summary>
         public static void ValidOption()
         {
             Console.WriteLine("Faites un choix de 1 à 5");

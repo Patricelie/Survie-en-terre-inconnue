@@ -51,7 +51,6 @@ namespace TravailPratique
                         Console.Clear();
                         break;
                 }
-
             }
         }
 
@@ -66,6 +65,7 @@ namespace TravailPratique
                 View.DisplayGameMenu();
                 View.DisplayGrid(Game.grid, Game.posY, Game.posX);
                 ConsoleKeyInfo input = Console.ReadKey();
+
                 if (Game.countHiver > 0)
                 {
                     switch (input.Key)
@@ -115,7 +115,6 @@ namespace TravailPratique
                     return;
                 }
             }
-
         }
 
         /// <summary>

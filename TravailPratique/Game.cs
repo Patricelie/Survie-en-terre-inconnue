@@ -16,7 +16,7 @@ namespace TravailPratique
         /// <value>Numéro de la montagne.</value>
         public const int Mountain = 3;
         /// <value>Numéro de la rivière.</value>
-        public const int RIVIERE = 4;
+        public const int RIVER = 4;
         /// <value>Numéro de la prairie.</value>
         public const int PRAIRIE = 5;
         /// <value>Numéro de la forêt.</value>
@@ -28,7 +28,7 @@ namespace TravailPratique
         /// <value>Conteur montagne.</value>
         public static int countMountain = 0;
         /// <value>Conteur rivière.</value>
-        public static int countRiviere = 0;
+        public static int countRiver = 0;
         /// <value>Conteur prairie.</value>
         public static int countPrairie = 0;
         /// <value>Conteur desert.</value>
@@ -49,6 +49,7 @@ namespace TravailPratique
         public static int countHouse = 0;
         /// <value>Conteur avant l'hiver.</value>
         public static int countHiver = 200;
+        /// <value>La carte du jeu.</value>
         public static int[,] grid =
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -62,8 +63,11 @@ namespace TravailPratique
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         };
+        /// <value>Position X du joueur au départ</value>
         public static int posX = 0;
+        /// <value>Position Y du joueur au départ</value>
         public static int posY = 0;
+        /// <value>Initialisation du seed pour générer la couleur.</value>
         public static Random rnd = new Random();
 
         /// <summary>
@@ -89,7 +93,7 @@ namespace TravailPratique
             countSwamp = 0;
             countForest = 0;
             countMountain = 0;
-            countRiviere = 0;
+            countRiver = 0;
             countPrairie = 0;
             countDesert = 0;
             countFire = 0;
@@ -133,7 +137,6 @@ namespace TravailPratique
 
         public static void MoveDown()
         {
-
             if (posY < grid.GetLength(0) - 1)
             {
                 posY++;
@@ -143,7 +146,6 @@ namespace TravailPratique
 
         public static void MoveLeft()
         {
-
             if (posX > 0)
             {
                 posX--;
@@ -153,7 +155,6 @@ namespace TravailPratique
 
         public static void MoveRight()
         {
-
             if (posX < grid.GetLength(0) - 1)
             {
                 posX++;
@@ -180,8 +181,8 @@ namespace TravailPratique
                 case Mountain:
                     countMountain++;
                     return;
-                case RIVIERE:
-                    countRiviere++;
+                case RIVER:
+                    countRiver++;
                     return;
                 case DESERT:
                     countDesert++;
@@ -197,11 +198,11 @@ namespace TravailPratique
             switch (input.Key)
             {
                 case ConsoleKey.D1:
-                    if (countForest >= 2 && countRiviere >= 1)
+                    if (countForest >= 2 && countRiver >= 1)
                     {
                         countFire++;
                         countForest -= 2;
-                        countRiviere--;
+                        countRiver--;
                         WinterTimer();
                     }
                     return;
@@ -280,11 +281,11 @@ namespace TravailPratique
         /// </summary>
         public static void Backup()
         {
-            int[] backupCounter = {posY,posX,countSwamp,countPrairie,countRiviere,countMountain,countForest,countDesert,countFire,countBrick,countAxe,countHouse,countInsulating,countBoard,countWindowpane,countHiver};
+            int[] backupCounter = {posY,posX,countSwamp,countPrairie, countRiver, countMountain,countForest,countDesert,countFire,countBrick,countAxe,countHouse,countInsulating,countBoard,countWindowpane,countHiver};
             string counter = string.Join(",", backupCounter);
             File.WriteAllText("backup.text", $"{counter}\n");
-
             string[,] gridValues = new string[10, 10];
+
             for (int y = 0; y < grid.GetLength(0); y++)
             {
                 for (int x = 0; x < grid.GetLength(1); x++)
@@ -313,7 +314,7 @@ namespace TravailPratique
                     posX = Convert.ToInt32(counterDivided[1]);
                     countSwamp = Convert.ToInt32(counterDivided[2]);
                     countPrairie = Convert.ToInt32(counterDivided[3]);
-                    countRiviere = Convert.ToInt32(counterDivided[4]);
+                    countRiver = Convert.ToInt32(counterDivided[4]);
                     countMountain = Convert.ToInt32(counterDivided[5]);
                     countForest = Convert.ToInt32(counterDivided[6]);
                     countDesert = Convert.ToInt32(counterDivided[7]);

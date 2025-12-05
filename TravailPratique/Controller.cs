@@ -107,11 +107,13 @@ namespace TravailPratique
                 else
                 {
                     View.DisplayGameOver();
+                    Console.ReadKey();
                     return;
                 }
                 if (Game.IsGameWon())
                 {
                     View.Succeed();
+                    Console.ReadKey();
                     return;
                 }
             }

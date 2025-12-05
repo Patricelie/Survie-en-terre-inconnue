@@ -255,7 +255,6 @@ namespace TravailPratique
                         "\r\n/  \\_-__\\" +
                         "\r\n|[]| [] |");
             Console.WriteLine("Vous avez réussi à construire votre maison avant l'hiver.");
-            Console.ReadKey();
         }
 
         /// <summary>
@@ -272,7 +271,6 @@ namespace TravailPratique
                         "\r\n╚═╝     ╚══════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═╝        ╚═╝");
             Console.WriteLine();
             Console.WriteLine("Vous avez perdu le jeu car vous n'avez pas réussi à construire votre maison avant l'arrivée de l'hiver.");
-            Console.ReadKey();
         }
 
         /// <summary>

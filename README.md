@@ -19,6 +19,12 @@ L'utilisateur doit pouvoir parcourir cette carte en collectant des ressources qu
 - Validation des entrées de l'utillisateur
 - Sauvegarde des données
 
+## Architecture du projet
+Le projet est développé en suivant le patron de conception **MVC (Model–View–Controller)** :
+- **Model** : gestion de la logique du jeu et des données
+- **View** : affichage et interface utilisateur
+- **Controller** : gestion des interactions du jeu
+
 ## Auteurs
 - Patricelie Njoh Ngueng
 - Aminata Diao
